@@ -17,8 +17,27 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('admin')->group(function () {
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+    Route::get('dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::get('register', 'AdminController@create')->name('admin.register');
+    Route::post('register', 'AdminController@store')->name('admin.register.store');
+    Route::get('login', 'Auth\AdminLoginController@login')->name('admin.auth.login');
+    Route::post('login', 'Auth\AdminLoginController@loginAdmin')->name('admin.auth.loginAdmin');
+
+    Route::group(['middleware' => ['admin']], function () {
+        Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
+        Route::resource('categories', 'CategoryController');
+        Route::resource('musics', 'MusicController');
+    });
+
+});
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
+    Route::get('/categories', 'CategoryController');
+    Route::get('/favorites', 'MusicController');
+});

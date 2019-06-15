@@ -14,6 +14,10 @@ class AddColumnToMusicsTable extends Migration
     public function up()
     {
         Schema::table('musics', function (Blueprint $table) {
+            /*
+             * Bu tabloyu sonradan yaratmamızın sebebi ilişkili sutunların migration işlemi yapılırken varolmayabilmesidir
+             * onDelete('cascade') ile ilişkilerden biri silinirse diğeri de etkilenecek
+             * */
             if (!Schema::hasColumn('musics', 'category_id')) {
                 $table->unsignedBigInteger('category_id')->unsigned()->nullable();
                 $table->foreign('category_id', '288262_564325676543')->references('id')->on('categories')->onDelete('cascade');

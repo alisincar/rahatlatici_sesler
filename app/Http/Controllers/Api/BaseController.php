@@ -33,8 +33,10 @@ class BaseController extends Controller
                     'message' => 'Update Application.'
                 ]);
             }else{
-                // kategorilere ait müzikleride kategorilerle birlikte almak istersek with kullanacağız
-                // Kategori içine girildikçe müzikleri geçmek için getCategory fonksiyonunu kullanabiliriz
+                /*
+                 * Kategorilere ait müzikleride kategorilerle birlikte almak istersek with kullanacağız
+                 * Kategori içine girildikçe müzikleri çekmek için getCategory fonksiyonunu kullanabiliriz
+                 * */
                 $categories=Category::where('status','1')->with('music')->get();
                 $data=['user'=>$user,'categories'=>$categories];
                 return response()->json(['status'=>200,'data'=>$data]);
@@ -42,6 +44,9 @@ class BaseController extends Controller
         }
     }
 
+   /*
+    * Kategorinin bilgilerini ve
+    * */
     public function getCategory()
     {
         $user = Auth::guard('api')->user();

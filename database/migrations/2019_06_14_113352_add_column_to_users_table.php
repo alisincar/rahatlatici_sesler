@@ -14,6 +14,9 @@ class AddColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            /*
+             * Bearer Token için gerekli benzersiz api_token sutunu
+             * */
             if (!Schema::hasColumn('users', 'api_token')) {
                 $table->string('api_token', 60)->unique()->nullable();
             }
