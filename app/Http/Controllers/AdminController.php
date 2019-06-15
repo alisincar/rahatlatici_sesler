@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Admin;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -49,12 +50,18 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        // validate the data
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+        // Admin üyeliğinde mailin benzersiz olması ve parolaların aynı olması zorunluluğunu ayarlıyoruz
+        $validateArray = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'password' => ['required', 'string', 'min:8'],
+            'password_confirmation' => ['required', 'string', 'min:8','same:password'],
+        ];
+        $vld = Validator::make($request->all(), $validateArray);
+        if ($vld->fails()) {
+            return redirect()->back()
+                ->withErrors($vld)->withInput();
+        }
         // store in the database
         $admins = new Admin;
         $admins->name = $request->name;

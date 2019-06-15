@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 
@@ -35,9 +31,7 @@ Route::prefix('admin')->group(function () {
 
 });
 
-Route::group(['middleware' => ['admin']], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
-    Route::get('/categories', 'CategoryController');
-    Route::get('/favorites', 'MusicController');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::post('logout', 'Auth\AdminLoginController@logout')->name('logout');
 });

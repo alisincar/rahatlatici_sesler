@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    @auth
+                    @if(Auth::guard('admin')->check())
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('musics.index') }}"><i class="fas fa-home"></i> Müzikler</a>
                         </li>
@@ -44,13 +44,13 @@
                             <a class="nav-link" href="{{ route('categories.index') }}"><i class="fas fa-list-ul"></i>
                                 Kategoriler</a>
                         </li>
-                    @endauth
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
-                    @guest
+                    @if(!Auth::guard('admin')->check())
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.auth.login') }}">{{ __('Login') }}</a>
                         </li>
@@ -79,7 +79,7 @@
                                 </form>
                             </div>
                         </li>
-                    @endguest
+                    @endif
                 </ul>
             </div>
         </div>
