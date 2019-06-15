@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Music;
 use Illuminate\Http\Request;
 

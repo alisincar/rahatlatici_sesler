@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\AppInfo;
 use App\Category;
+use App\Http\Controllers\Controller;
 use App\Music;
 use App\User;
 use Illuminate\Http\Request;
@@ -68,7 +69,7 @@ class AdminController extends Controller
         $admins->email = $request->email;
         $admins->password = bcrypt($request->password);
         $admins->save();
-        return redirect()->route('admin.auth.login');
+        return redirect()->route('admin.auth.login')->with('success','Giriş Yapınız');
     }
 
     /**
