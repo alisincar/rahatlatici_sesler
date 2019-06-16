@@ -11,4 +11,9 @@ class Music extends Model
     public function category(){
         return $this->hasOne(Category::class,'id','category_id');
     }
+
+    public function is_favorite(){
+        return $this->hasOne(Favorite::class,'music_id','id')->where('user_id',Auth()->guard('api')->user()->id);
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Favorite;
 use App\Http\Controllers\Controller;
+use App\Models\Music;
 use Illuminate\Support\Facades\Auth;
 
 class
@@ -21,7 +22,7 @@ FavoriteController extends Controller
                 'message' => 'Unauthenticated.'
             ]);
         }
-        return response()->json(['status'=>200,$user->favorites]);
+        return response()->json(['status'=>200,'data'=>$user->favorites]);
     }
 
     /*
@@ -38,14 +39,19 @@ FavoriteController extends Controller
             ]);
         } else {
             $data = ['music_id' => (int)request()->music_id, 'user_id' => $user->id];
+            $music = Music::where('id', (int)request()->music_id)->count();
             $favorite = Favorite::where($data)->count();
-            if ($favorite > 0) {
+            if ($favorite > 0 || $music==0) {
                 return response()->json([
                     'status' => 304,
                     'message' => 'Not Modified.'
                 ]);
             } else {
-                return response()->json(['status'=>200,Favorite::create($data)]);
+                return response()->json([
+                    'status'=>200,
+                    'message' => 'success',
+                    'data'=>Favorite::create($data)
+                ]);
             }
 
         }
