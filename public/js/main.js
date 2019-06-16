@@ -128,7 +128,7 @@ function favorite(elem, id, type, method, favorite) {
         if (data.status === 200) {
             if (type === 'delete') {
                 if (favorite === 'favorite') {
-                    $('.music_id_'+id).remove();
+                    $(elem).parent().parent().parent().parent().remove();
                 }else{
                     $('#favorites').find('.music_id_'+id).remove();
                 }
@@ -261,7 +261,7 @@ function category_cart(data) {
     return '<div onclick="getCategory(\'' + data.id + '\')" class="card w-100 text-center mx-auto mb-3" style="height: 150px;overflow: hidden">\n' +
         '                        <img class="card-img-top" src="' + data.cover_image + '" alt="' + data.name + '">\n' +
         '                        <div class="card-img-overlay">\n' +
-        '                            <h4 class="card-text mt-5">' + data.name + '</h4>\n' +
+        '                            <h4 class="card-text mt-5 p-2" style="background: rgba(255,255,255,0.6);">' + data.name + '</h4>\n' +
         '                        </div>\n' +
         '                    </div>';
 }
@@ -277,7 +277,7 @@ function music_cart(data, favorite = null) {
         '                            <img class="card-img-top" src="' + data.cover_image + '" alt="' + data.name + '">\n' +
         '                            <div class="card-img-overlay">\n' +
         '                                <div class="row">\n' +
-        '                                    <h4 class="col-md-8">' + data.name + '</h4>\n' +
+        '                                    <h4 class="col-md-8 p-2" style="background: rgba(255,255,255,0.6);">' + data.name + '</h4>\n' +
         '                                    <div class="col-md-4">\n' +
         favorite_button +
         '                                    </div>\n' +
