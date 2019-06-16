@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +36,7 @@ class UserController extends Controller
             $user->save();
             return response()->json([
                 'status' => 200,
+                'message'=>'success',
                 'api_token' => $user->api_token,
                 'username' => $user->name,
                 'email' => $user->email,
@@ -78,6 +79,7 @@ class UserController extends Controller
         if ($user->save()) {
             return response()->json([
                 'status' => 200,
+                'message'=>'success',
                 'api_token' => $user->api_token,
                 'username' => $user->name,
                 'email' => $user->email,

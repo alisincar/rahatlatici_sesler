@@ -20,7 +20,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($items as $item) {
-            \App\Category::create($item);
+            \App\Models\Category::create($item);
         }
     }
 }

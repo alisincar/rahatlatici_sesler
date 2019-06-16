@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\AppInfo;
-use App\Category;
-use App\Music;
+use App\Models\AppInfo;
+use App\Models\Category;
+use App\Models\Music;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +37,7 @@ class BaseController extends Controller
                  * Kategorilere ait müzikleride kategorilerle birlikte almak istersek with kullanacağız
                  * Kategori içine girildikçe müzikleri çekmek için getCategory fonksiyonunu kullanabiliriz
                  * */
-                $categories=Category::where('status','1')->with('music')->get();
+                $categories=Category::where('status','1')->with('musics')->get();
                 $data=['user'=>$user,'categories'=>$categories];
                 return response()->json(['status'=>200,'data'=>$data]);
             }
@@ -59,5 +59,26 @@ class BaseController extends Controller
             $category = Category::where(['id' => (int)\request()->category_id, 'status' => '1'])->with('music')->first();
             return response()->json(['status'=>200,$category]);
         }
+    }
+
+    /*
+     * Version Kontrolü için Uygulama açıldığı anda bu kısma çağrı göndermeli
+     * Version sonucu json tipinde http kodu olarak dönülecek
+     * */
+
+    public function versionControl(){
+
+        $app_info=AppInfo::select('app_version')->orderBy('id','DESC')->first();
+        $user_version=\request()->version;
+        if($app_info->app_version>$user_version){
+            return response()->json([
+                'status' => 410,
+                'message' => 'Update Application.'
+            ]);
+        }
+        return response()->json([
+            'status' => 200,
+            'message' => 'success'
+        ]);
     }
 }

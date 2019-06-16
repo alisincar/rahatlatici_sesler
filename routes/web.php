@@ -11,7 +11,7 @@
 |
 */
 
-Auth::routes();
+//Auth::routes();
 
 
 
@@ -31,7 +31,8 @@ Route::prefix('admin')->group(function () {
 
 });
 
-Route::group(['middleware' => ['web']], function () {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::post('logout', 'Auth\AdminLoginController@logout')->name('logout');
-});
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/login', 'HomeController@login')->name('login');
+Route::post('logout', 'Auth\AdminLoginController@logout')->name('logout');
+

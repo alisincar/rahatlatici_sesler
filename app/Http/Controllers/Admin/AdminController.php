@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\AppInfo;
-use App\Category;
+use App\Models\AppInfo;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
-use App\Music;
-use App\User;
+use App\Models\Music;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-use App\Admin;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller

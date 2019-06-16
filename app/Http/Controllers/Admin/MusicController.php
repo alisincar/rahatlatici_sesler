@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
+use App\Models\Category;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Music;
+use App\Models\Music;
 use Illuminate\Http\Request;
 
 class MusicController extends Controller
@@ -82,7 +82,7 @@ class MusicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Music $music
+     * @param \App\Models\Music $music
      * @return \Illuminate\Http\Response
      */
     public function show(Music $music)
@@ -94,7 +94,7 @@ class MusicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Music $music
+     * @param \App\Models\Music $music
      * @return \Illuminate\Http\Response
      */
     public function edit(Music $music)
@@ -108,7 +108,7 @@ class MusicController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Music $music
+     * @param \App\Models\Music $music
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Music $music)
@@ -160,7 +160,7 @@ class MusicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Music $music
+     * @param \App\Models\Music $music
      * @return \Illuminate\Http\Response
      */
     public function destroy(Music $music)

@@ -11,6 +11,6 @@ class AppInfoSeeder extends Seeder
      */
     public function run()
     {
-        \App\AppInfo::create(['app_version'=>100]);
+        \App\Models\AppInfo::create(['app_version'=>100]);
     }
 }
