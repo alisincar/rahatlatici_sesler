@@ -19,6 +19,12 @@
 
 
 # Kurulum
+Laradock kurmak için
+
+        git clone https://github.com/Laradock/laradock.git
+        cd laradock
+        cp env-example .env
+
 Laradock nginx içerisinde rahatlatici_sesler.conf dosyası oluşturup ardından içerisi aşağıdaki gibi yapılandırılmalı
 
         server {
@@ -64,11 +70,11 @@ Laradock nginx içerisinde rahatlatici_sesler.conf dosyası oluşturup ardından
             error_log /var/log/nginx/rahatlatici_sesler_error.log;
             access_log /var/log/nginx/rahatlatici_sesler_access.log;
         }
-ardından 
+ardından laradock klasörü içerisinde 
     
-    laradock içerisinde docker-compose up -d nginx mysql
+    docker-compose up -d nginx mysql
 
-env ve migration yapılandırmasından sonra projeyi çalıştırabilirsiniz.
+daha sonra projemizin env ve migration yapılandırmasından sonra projeyi çalıştırabilirsiniz.
 
 # Teknik
 
